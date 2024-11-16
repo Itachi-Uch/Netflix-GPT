@@ -1,8 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Header from "./Header";
+import validateLogin from "../utils.js/validate";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const email = useRef(null);
+  const password = useRef(null);
+  const name = useRef(null);
+
+  const handleValidation = () => {
+    const message = validateLogin(
+      email?.current?.value,
+      password?.current?.value,
+      name?.current?.value
+    );
+    setErrorMessage(message);
+  };
   const toggleSignInForm = () => {
     setIsSignIn(!isSignIn);
   };
@@ -15,12 +29,16 @@ const Login = () => {
           alt="Background-image"
         />
       </div>
-      <form className="bg-black absolute w-3/12 my-40 m-auto left-0 right-0 py-12 px-6 bg-opacity-85 text-white">
+      <form
+        className="bg-black absolute w-3/12 my-40 m-auto left-0 right-0 py-12 px-6 bg-opacity-85 text-white"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <h1 className="font-bold text-3xl py-2 my-2">
           {isSignIn ? "Sign in" : "Sign up"}
         </h1>
         {!isSignIn && (
           <input
+            ref={name}
             type="text"
             placeholder="Name"
             className="p-4 my-2 w-full bg-black border border-gray-400 rounded-lg "
@@ -30,13 +48,19 @@ const Login = () => {
           type="text"
           placeholder="Email"
           className="p-4 my-2 w-full bg-gray-950 border border-gray-400 rounded-lg "
+          ref={email}
         ></input>
         <input
           type="password"
           placeholder="Password"
           className="p-4 my-2 w-full bg-gray-950 border border-gray-400 rounded-lg"
+          ref={password}
         ></input>
-        <button className=" w-full p-4 my-6 bg-red-600 bg-opacity-100 rounded-lg">
+        <p className="text-red-500 text-lg">{errorMessage}</p>
+        <button
+          className=" w-full p-4 my-6 bg-red-600 bg-opacity-100 rounded-lg"
+          onClick={handleValidation}
+        >
           {isSignIn ? "Sign in" : "Sign up"}
         </button>
         <h1 className="text-gray-300">
