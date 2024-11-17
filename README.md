@@ -1,4 +1,4 @@
 //Dummy creds for login
 
-Username: "dummy@gmail.com"
-password: "dummy@123"
+Username: dummy@gmail.com
+password: dummy@123

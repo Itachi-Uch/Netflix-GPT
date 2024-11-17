@@ -7,12 +7,11 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils.js/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils.js/userSlice";
+import { BG_IMAGE_LOGINPAGE } from "../utils.js/constants";
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
-  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null);
   const email = useRef(null);
   const password = useRef(null);
@@ -47,7 +46,6 @@ const Login = () => {
               dispatch(
                 addUser({ uid: uid, displayName: displayName, email: email })
               );
-              navigate("/browse");
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -73,7 +71,6 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log("sigining in---- ", user);
-          navigate("/browse");
 
           // ...
         })
@@ -91,10 +88,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/03ad76d1-e184-4d99-ae7d-708672fa1ac2/web/IN-en-20241111-TRIFECTA-perspective_149877ab-fcbd-4e4f-a885-8d6174a1ee81_large.jpg"
-          alt="Background-image"
-        />
+        <img src={BG_IMAGE_LOGINPAGE} alt="Background-image" />
       </div>
       <form
         className="bg-black absolute w-3/12 my-40 m-auto left-0 right-0 py-12 px-6 bg-opacity-85 text-white"
