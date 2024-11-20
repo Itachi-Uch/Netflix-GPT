@@ -37,7 +37,7 @@ const Header = () => {
       <img className=" w-44" src={LOGO_URL} alt="Logo"></img>
       {user && (
         <button
-          className="p-2 m-2 font-extrabold text-lg border border-gray-500 rounded-lg"
+          className="p-2 m-2 font-extrabold text-lg border border-gray-500 rounded-lg text-white"
           onClick={handleLogOut}
         >
           Logout

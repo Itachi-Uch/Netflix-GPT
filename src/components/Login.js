@@ -13,11 +13,15 @@ import { BG_IMAGE_LOGINPAGE } from "../utils.js/constants";
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
   const dispatch = useDispatch();
 
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   const handleValidation = () => {
     const message = validateLogin(
       email?.current?.value,
@@ -51,7 +55,6 @@ const Login = () => {
               setErrorMessage(error.message);
             });
 
-          console.log(user);
           // ...
         })
         .catch((error) => {
@@ -112,11 +115,18 @@ const Login = () => {
           ref={email}
         ></input>
         <input
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="Password"
           className="p-4 my-2 w-full bg-gray-950 border border-gray-400 rounded-lg"
           ref={password}
         ></input>
+        <button
+          onClick={handleShowPassword}
+          className="text-gray-400 w-6 mx-64 hover:text-white"
+        >
+          Show
+        </button>
+
         <p className="text-red-500 text-lg">{errorMessage}</p>
         <button
           className=" w-full p-4 my-6 bg-red-600 bg-opacity-100 rounded-lg"
