@@ -12,3 +12,5 @@ export const API_OPTIONS = {
     accept: "application/json",
   },
 };
+
+export const PICTURE_PATH = "https://image.tmdb.org/t/p/w500/";
