@@ -5,10 +5,12 @@ import { auth } from "../utils.js/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils.js/userSlice";
 import { LOGO_URL } from "../utils.js/constants";
+import { toggleSearch } from "../utils.js/GPTSearchSlice";
 const Header = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user?.email);
+  const gptSearch = useSelector((store) => store.GPTSearch.toggleGPTSearch);
   const navigate = useNavigate();
   const handleLogOut = () => {
     signOut(auth)
@@ -32,16 +34,29 @@ const Header = () => {
       }
     });
   }, []);
+  const handleGPTSearchToggle = () => {
+    dispatch(toggleSearch());
+  };
   return (
     <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 w-screen flex justify-between">
       <img className=" w-44" src={LOGO_URL} alt="Logo"></img>
+
       {user && (
-        <button
-          className="p-2 m-2 font-extrabold text-lg border border-gray-500 rounded-lg text-white"
-          onClick={handleLogOut}
-        >
-          Logout
-        </button>
+        <div>
+          <button
+            className="p-2 m-2 text-lg border  border-gray-500 rounded-lg text-white"
+            onClick={handleGPTSearchToggle}
+          >
+            {gptSearch ? "Home" : "GPT Search"}
+          </button>
+
+          <button
+            className="p-2 m-2 font-extrabold text-lg border border-gray-500 rounded-lg text-white"
+            onClick={handleLogOut}
+          >
+            Logout
+          </button>
+        </div>
       )}
     </div>
   );

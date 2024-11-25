@@ -7,10 +7,11 @@ export const BG_IMAGE_LOGINPAGE =
 export const API_OPTIONS = {
   method: "GET",
   headers: {
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMWM3NDlhZTMxYjRmYWZhODI2MjM1NGY5NjQ1MGQxMyIsIm5iZiI6MTczMTg0NzQyNS45ODUzNTY2LCJzdWIiOiI2NzM5ZTFhNDU4NTlmOTgxZWVkZmJjYmUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.lCxiGDzf413KuOxKo45FEoxil_5XsHko2XyWTKLtOoc",
+    Authorization: "Bearer " + process.env.REACT_APP_TMDB_KEY,
     accept: "application/json",
   },
 };
 
 export const PICTURE_PATH = "https://image.tmdb.org/t/p/w500/";
+
+export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
